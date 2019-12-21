@@ -1,0 +1,10 @@
+Get all customers from the database.
+How to use the api to get all customers.
+---
+tags:
+  - CustomerAPI
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: A list of all customers from the database.

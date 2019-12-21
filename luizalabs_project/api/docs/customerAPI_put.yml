@@ -1,0 +1,15 @@
+Update a customer name or email.
+How to use the api to update a customer.
+---
+tags:
+  - CustomerAPI
+parameters:
+  - name: object_id
+    in: path
+    type: string
+    default: 5dfe806ad8bd8501a35a7039
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: Update an user email or name.

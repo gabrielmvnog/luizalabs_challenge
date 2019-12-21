@@ -20,7 +20,7 @@ class Response():
     @staticmethod
     def autorization_error():
         return dict(message='Not autorized, please authenticate')
-    
+
     @staticmethod
     def login_error():
         return dict(message='Login error')
@@ -28,8 +28,8 @@ class Response():
 
 def verify_auth(function):
     wraps(function)
-    def wrapper(decorated):
 
+    def wrapper(decorated):
         if request.authorization:
             try:
                 user = request.authorization['username']

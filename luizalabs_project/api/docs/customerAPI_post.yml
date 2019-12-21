@@ -1,0 +1,19 @@
+Add a new customer to database.
+How to use the api to add a new customer.
+---
+tags:
+  - CustomerAPI
+parameters:
+  - name: name
+    in: path
+    type: string
+    default: username
+  - name: email
+    in: path
+    type: string
+    default: username@email.com
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: Add a new customer to database.
