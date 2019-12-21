@@ -31,9 +31,33 @@ class CustomerDB(Database):
 
         return None
 
-    def update(self):
+    def update(self, object_id, name, email):
 
-        return None
+        if name and email:
+            if self.__check_email(email):
+                return False
+
+            self.collection.update_one({'_id': ObjectId(object_id)},
+                                       {'$set': {
+                                        'name': name,
+                                        'email': email
+                                        }}, upsert=False)
+        elif name:
+            self.collection.update_one({'_id': ObjectId(object_id)},
+                                       {'$set': {
+                                           'name': name
+                                       }})
+        elif email:
+
+            if self.__check_email(email):
+                return False
+
+            self.collection.update_one({'_id': ObjectId(object_id)},
+                                       {'$set': {
+                                           'email': name
+                                       }})
+
+        return True
 
     def show_all(self):
 

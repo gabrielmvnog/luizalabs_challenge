@@ -41,6 +41,21 @@ class CustomerAPI(Resource):
         req = request.json
         database = CustomerDB()
 
+        try:
+            object_id = req['object_id']
+            name = req['name'] if 'name' in req.keys() else None
+            email = req['email'] if 'email' in req.keys() else None
+
+            result = database.update(object_id, name, email)
+
+            message = "Customer updated with success" \
+                if result else "Couldn't update the user, email already in use"
+
+            return Response.custom(dict(message=message))
+
+        except (KeyError, TypeError):
+            return Response.parameters_error()
+
         return Response.error()
 
     @verify_auth
