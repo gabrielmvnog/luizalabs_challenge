@@ -1,7 +1,0 @@
-README.md
-setup.py
-luizalabs_project.egg-info/PKG-INFO
-luizalabs_project.egg-info/SOURCES.txt
-luizalabs_project.egg-info/dependency_links.txt
-luizalabs_project.egg-info/requires.txt
-luizalabs_project.egg-info/top_level.txt
