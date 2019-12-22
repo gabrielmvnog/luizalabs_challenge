@@ -43,7 +43,7 @@ And finally you can run using this command:
 gunicorn -w 4 -b 0.0.0.0:8000 luizalabs_project:app
 ```
 
-and access using the same link that you http://0.0.0.0:8000/
+and access using the same link that as provide before: http://0.0.0.0:8000/
 
 That's it! Much more easy with docker-compose, right?
 
@@ -57,7 +57,7 @@ username: **admin**
 
 password: **admin**
 
-In the Swagger (the documentation site) look for the button "Authorize" in the top left corner, put that credentials and you will be testing the API.
+In the Swagger (the documentation site) look for the button "Authorize" in the top left corner, put that credentials and you will be able to use the API.
 
 ### Want to test the project?
 
@@ -75,7 +75,7 @@ and so run:
 pytest
 ```
 
-if everything went weel, you are ready to use the application!
+if everything went well, you are ready to use the application!
 
 ### Are the project complete?
 
