@@ -1,0 +1,26 @@
+Delete a customer's favorite iten from the database.
+How to use the api to delete a customer's favorite iten.
+---
+tags:
+  - FavoritesAPI
+parameters:
+  - name: body
+    in: body
+    schema:
+      customer_id: string
+      product_id: string
+      required:
+        - customer_id
+        - product_id
+      properties:
+        customer_id: 
+          type: string
+          description: Customer's ID
+        product_id: 
+          type: string
+          description: Product's ID to be removed
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: A message if the action went well.

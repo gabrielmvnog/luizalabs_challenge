@@ -1,6 +1,7 @@
 from flasgger import Swagger
-from flask import Flask
+from flask import Flask, redirect
 from flask_restful import Api
+from loguru import logger
 
 from luizalabs_project.api import add_resources
 
@@ -18,6 +19,8 @@ template = {
     },
 }
 
+logger.add("luizalabs_project.log")
+
 app = Flask(__name__)
 api_flask = Api(app)
 swagger = Swagger(app=app, template=template)
@@ -27,4 +30,4 @@ add_resources(api_flask)
 
 @app.route('/')
 def index():
-    return 'Api is running', 200
+    return redirect('/apidocs')

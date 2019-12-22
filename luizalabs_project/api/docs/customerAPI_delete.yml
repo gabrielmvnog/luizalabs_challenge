@@ -1,0 +1,21 @@
+Delete a customer from the database.
+How to use the api to delete a customer.
+---
+tags:
+  - CustomerAPI
+parameters:
+  - name: body
+    in: body
+    schema:
+      customer_id: string
+      required:
+        - customer_id
+      properties:
+        customer_id: 
+          type: string
+          description: Customer's ID
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: Delete a customer

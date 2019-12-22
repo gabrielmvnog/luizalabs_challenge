@@ -1,0 +1,16 @@
+Get all customer's favorite itens from the database.
+How to use the api to get a list of customer's favorite itens.
+---
+tags:
+  - FavoritesAPI
+
+parameters:
+  - in: path
+    name: customer_id
+    schema:
+      type: string
+security:
+  - basicAuth: []
+responses:
+  200:
+    description: A list of all customer's favorite itens from the database.
