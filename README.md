@@ -47,11 +47,39 @@ and access using the same link that you http://0.0.0.0:8000/
 
 That's it! Much more easy with docker-compose, right?
 
+### Don't forget the login and password!
+
+To use the API you need the authorization, without that, you will do nothing.
+
+This API use a basicAuth and if you followed all the steps from this tutorial the credentials are the default:
+
+username: **admin**
+
+password: **admin**
+
+In the Swagger (the documentation site) look for the button "Authorize" in the top left corner, put that credentials and you will be testing the API.
+
+### Want to test the project?
+
+Yeah! You can use the unity test to do so.
+
+first, install pytest with:
+
+```shell
+pip install pytest
+```
+
+and so run:
+
+```
+pytest
+```
+
+if everything went weel, you are ready to use the application!
+
 ### Are the project complete?
 
 So, in the real world it's need to put some improvements like some metrics to see it's performance. I like tools like Prometheus & Grafana and expose in the application a endpoint "/metrics" with some helpful informations of the API. Another solutions is to create your own application to monitor the performance, I really recommend Dash if you are a Python Lover!
-
-Other thing that is recommended is to apply tests in your project like integration test and unity test. 
 
 ### Contacts
 

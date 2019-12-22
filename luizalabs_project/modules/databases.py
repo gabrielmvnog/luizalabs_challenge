@@ -13,6 +13,7 @@ class Database():
 
 
 class CustomerDB(Database):
+    """ Access the customer collection """
 
     def __init__(self):
         super().__init__()
