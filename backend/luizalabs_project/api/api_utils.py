@@ -29,14 +29,14 @@ class Response():
 def verify_auth(function):
     wraps(function)
 
-    def wrapper(decorated):
+    def wrapper(*args, **kwargs):
         if request.authorization:
             try:
                 user = request.authorization['username']
                 password = request.authorization['password']
 
                 if user == "admin" and password == "admin":
-                    return function(decorated)
+                    return function(*args, **kwargs)
                 else:
                     return Response.login_error()
 

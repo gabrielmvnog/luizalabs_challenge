@@ -1,7 +1,7 @@
 import json
 from flask import request
+import bson
 from bson import json_util
-from functools import wraps
 from flasgger import swag_from
 from flask_restful import Resource
 
@@ -10,14 +10,31 @@ from luizalabs_project.modules.databases import CustomerDB
 from luizalabs_project.api.api_utils import Response, verify_auth
 
 
-class CustomerAPI(Resource):
-    
-    @swag_from('docs/customerAPI_get.yml')
+class CustomersListAPI(Resource):
+
+    @swag_from('docs/customersListAPI_get.yml')
     @verify_auth
     def get(self):
         database = CustomerDB()
 
-        return json.loads(json_util.dumps(database.show_all()))
+        try:
+            return json.loads(json_util.dumps(database.show_all()))
+        except bson.errors.InvalidId:
+            return Response.parameters_error()
+
+
+class CustomerListAPI(Resource):
+    @swag_from('docs/customerListAPI_get.yml')
+    @verify_auth
+    def get(self, customer_id):
+        database = CustomerDB()
+
+        try:
+            return json.loads(json_util.dumps(database.show_one(customer_id)))
+        except bson.errors.InvalidId:
+            return Response.parameters_error()
+
+class CustomerAPI(Resource):
 
     @swag_from('docs/customerAPI_post.yml')
     @verify_auth

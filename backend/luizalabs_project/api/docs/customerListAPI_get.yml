@@ -1,0 +1,15 @@
+Get one customer from the database.
+How to use the api to get one customer.
+---
+tags:
+  - CustomerAPI
+security:
+  - basicAuth: []
+parameters:
+  - in: path
+    name: customer_id
+    schema:
+      type: string
+responses:
+  200:
+    description: Values from one customer from the database.

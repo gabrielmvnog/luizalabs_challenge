@@ -8,7 +8,7 @@ template = {
     "Swagger": "2.0",
     "info": {
         "title": "Luizalabs - Challenge",
-        "description": "Development of an CRUD",
+        "description": "Development of a CRUD",
         "version": "0.0.1"
     },
     'securityDefinitions': {
