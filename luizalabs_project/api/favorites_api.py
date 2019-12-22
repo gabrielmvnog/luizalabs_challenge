@@ -1,4 +1,3 @@
-import loguru
 import pymongo
 from loguru import logger
 from flask import request
@@ -29,6 +28,8 @@ class FavoritesListAPI(Resource):
 
             return Response.error()
 
+        return Response.error()
+
 
 class FavoritesAPI(Resource):
 
@@ -45,7 +46,7 @@ class FavoritesAPI(Resource):
 
         except (KeyError, TypeError):
             logger.exception("Parameters error !!!")
-            
+
             return Response.parameters_error()
 
         try:
@@ -56,7 +57,8 @@ class FavoritesAPI(Resource):
                 result = database.insert_favorite(customer_id, product_id)
 
                 if result:
-                    return Response.custom(dict(message="insertion with success"))
+                    return Response.custom(
+                        dict(message="insertion with success"))
                 else:
                     return Response.custom(dict(message="item duplicated"))
 
@@ -65,6 +67,7 @@ class FavoritesAPI(Resource):
 
             return Response.error()
 
+        return Response.error()
 
     @swag_from('docs/favoritesAPI_delete.yml')
     @verify_auth
@@ -96,3 +99,5 @@ class FavoritesAPI(Resource):
             logger.exception("Database Failure !!!")
 
             return Response.error()
+
+        return Response.error()

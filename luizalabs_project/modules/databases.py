@@ -3,6 +3,7 @@ from bson import ObjectId
 
 from luizalabs_project.config import MONGO_HOST, MONGO_PORT
 
+
 class Database():
     def __init__(self):
         self.client = MongoClient(MONGO_HOST, int(MONGO_PORT))
@@ -22,7 +23,7 @@ class CustomerDB(Database):
     def __check_email(self, email: str):
         """
         Check if email already exist.
-    
+
         PARAMETERS
         ----------
             - email: string to be searched.
@@ -35,14 +36,14 @@ class CustomerDB(Database):
     def add(self, name: str, email: str) -> bool:
         """
         add a new customer to database.
-    
+
         PARAMETERS
         ----------
             - name: string representing a name.
             - email: string that must be unique in the database.
         RETURN:
         -------
-            - A boolean representing success or failure. 
+            - A boolean representing success or failure.
         """
 
         if not self.__check_email(email):
@@ -56,7 +57,7 @@ class CustomerDB(Database):
     def update(self, customer_id: str, name: str, email: str) -> bool:
         """
         update an existing customer in database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
@@ -65,7 +66,7 @@ class CustomerDB(Database):
             - email: string representing the email. (can be none)
         RETURN:
         -------
-            - A boolean representing success or failure. 
+            - A boolean representing success or failure.
         """
 
         if name and email:
@@ -89,7 +90,7 @@ class CustomerDB(Database):
 
             self.collection.update_one({'_id': ObjectId(customer_id)},
                                        {'$set': {
-                                           'email': name
+                                           'email': email
                                        }})
 
         return True
@@ -100,7 +101,7 @@ class CustomerDB(Database):
 
         RETURN:
         -------
-            - A list of costumers. 
+            - A list of costumers.
         """
 
         return list(self.collection.find({}))
@@ -108,14 +109,14 @@ class CustomerDB(Database):
     def show_one(self, customer_id) -> dict:
         """
         show one customer from the database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
                 to be searched.
         RETURN:
         -------
-            - Informations about one customer. 
+            - Informations about one customer.
         """
 
         return self.collection.find_one({'_id': ObjectId(customer_id)})
@@ -123,14 +124,14 @@ class CustomerDB(Database):
     def remove(self, customer_id: str) -> bool:
         """
         remove an existing customer in database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
                 to be searched.
         RETURN:
         -------
-            - A boolean representing success or failure. 
+            - A boolean representing success or failure.
         """
 
         result = self.collection.remove(dict(_id=ObjectId(customer_id)))
@@ -143,25 +144,26 @@ class CustomerDB(Database):
     def get_favorites(self, customer_id: str) -> dict:
         """
         show one customer's favorite products from the database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
                 to be searched.
         RETURN:
         -------
-            - Informations about the products of the customer. 
+            - Informations about the products of the customer.
         """
 
-        favorites = self.collection.find_one({'_id': ObjectId(customer_id)},
-                                             {'fav_products': 1})['fav_products']
+        favorites = self.collection.find_one(
+            {'_id': ObjectId(customer_id)},
+            {'fav_products': 1})['fav_products']
 
         return favorites
 
     def insert_favorite(self, customer_id: str, product_id: str) -> bool:
         """
         insert one customer's favorite products in database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
@@ -170,7 +172,7 @@ class CustomerDB(Database):
                 to be added.
         RETURN:
         -------
-            - A boolean representing success or failure. 
+            - A boolean representing success or failure.
         """
 
         favorites = self.get_favorites(customer_id)
@@ -188,7 +190,7 @@ class CustomerDB(Database):
     def remove_favorite(self, customer_id: str, product_id: str) -> bool:
         """
         remove one customer's favorite products in database.
-    
+
         PARAMETERS
         ----------
             - customer_id: an unique ID that represent the customer
@@ -197,7 +199,7 @@ class CustomerDB(Database):
                 to be removed.
         RETURN:
         -------
-            - A boolean representing success or failure. 
+            - A boolean representing success or failure.
         """
 
         favorites = self.get_favorites(customer_id)
@@ -205,9 +207,9 @@ class CustomerDB(Database):
         if product_id in favorites:
 
             self.collection.update_one({'_id': ObjectId(customer_id)},
-                                                {'$pull': {
-                                                    'fav_products': product_id
-                                                }})
+                                       {'$pull': {
+                                           'fav_products': product_id
+                                       }})
 
             return True
 

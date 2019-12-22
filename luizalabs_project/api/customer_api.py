@@ -28,6 +28,8 @@ class CustomersListAPI(Resource):
 
             return Response.error()
 
+        return Response.error()
+
 
 class CustomerListAPI(Resource):
     @swag_from('docs/customerListAPI_get.yml')
@@ -43,6 +45,8 @@ class CustomerListAPI(Resource):
             logger.exception("Database Failure !!!")
 
             return Response.error()
+
+        return Response.error()
 
 
 class CustomerAPI(Resource):
@@ -76,6 +80,8 @@ class CustomerAPI(Resource):
 
             return Response.error()
 
+        return Response.error()
+
     @swag_from('docs/customerAPI_put.yml')
     @verify_auth
     def put(self):
@@ -87,8 +93,10 @@ class CustomerAPI(Resource):
             name = req['name'] if 'name' in req.keys() else None
             email = req['email'] if 'email' in req.keys() else None
 
-            if (name is None) and (email is None):
-                return Response.custom(dict(message='Please, update need name or email as parameters'))
+            if (not name) and (not email):
+                return Response.custom(
+                    dict(message='Please, update need name or '
+                         'email as parameters'))
 
         except (KeyError, TypeError):
             logger.exception("Parameters error !!!")
@@ -109,6 +117,8 @@ class CustomerAPI(Resource):
             logger.exception("Database Failure !!!")
 
             return Response.error()
+
+        return Response.error()
 
     @swag_from('docs/customerAPI_delete.yml')
     @verify_auth
@@ -137,3 +147,5 @@ class CustomerAPI(Resource):
             logger.exception("Database Failure !!!")
 
             return Response.error()
+
+        return Response.error()

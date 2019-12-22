@@ -4,6 +4,7 @@ import jwt
 from loguru import logger
 from luizalabs_project.config import API_PASS, API_USER
 
+
 class Response():
     """ An helper to manage all the mensages from the API """
 

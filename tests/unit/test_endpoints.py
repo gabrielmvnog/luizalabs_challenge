@@ -2,6 +2,7 @@ from luizalabs_project import app
 
 client = app.test_client()
 
+
 def test_customer_endpoints():
     response = client.get('/api/customer/all')
 
@@ -27,6 +28,7 @@ def test_customer_endpoints():
 
     assert response.status_code == 200
     assert 'message' in response.json
+
 
 def test_products_endpoints():
 
