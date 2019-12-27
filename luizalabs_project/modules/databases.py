@@ -1,12 +1,12 @@
 from pymongo import MongoClient
 from bson import ObjectId
-
-from luizalabs_project.config import MONGO_HOST, MONGO_PORT
+import os
 
 
 class Database():
     def __init__(self):
-        self.client = MongoClient(MONGO_HOST, int(MONGO_PORT))
+        self.client = MongoClient(os.environ.get('MONGO_HOST'),
+                                  int(os.environ.get('MONGO_PORT')))
         self.database = self.client['luizalabs-project']
 
     def __del__(self):
@@ -134,9 +134,9 @@ class CustomerDB(Database):
             - A boolean representing success or failure.
         """
 
-        result = self.collection.remove(dict(_id=ObjectId(customer_id)))
+        result = self.collection.delete_one(dict(_id=ObjectId(customer_id)))
 
-        if result['n']:
+        if result.deleted_count:
             return True
 
         return None

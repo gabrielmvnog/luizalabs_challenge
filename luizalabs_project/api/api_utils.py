@@ -2,7 +2,7 @@ from functools import wraps
 from flask import request
 import jwt
 from loguru import logger
-from luizalabs_project.config import API_PASS, API_USER
+import os
 
 
 class Response():
@@ -50,7 +50,8 @@ def verify_auth(function):
                 user = request.authorization['username']
                 password = request.authorization['password']
 
-                if user == API_USER and password == API_PASS:
+                if user == os.environ.get('API_USER') \
+                        and password == os.environ.get('API_PASS'):
                     return function(*args, **kwargs)
                 else:
                     return Response.login_error()

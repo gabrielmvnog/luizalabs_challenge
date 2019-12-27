@@ -2,7 +2,6 @@ from luizalabs_project import app
 
 client = app.test_client()
 
-
 def test_customer_endpoints():
     response = client.get('/api/customer/all')
 
