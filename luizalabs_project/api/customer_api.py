@@ -70,10 +70,12 @@ class CustomerAPI(Resource):
 
             result = database.add(name, email)
 
-            message = "Customer added with success" \
-                if result else "Email already in use"
+            if result:
+                return Response.custom_success(
+                    dict(message="Customer added with success")
+                )
 
-            return Response.custom(dict(message=message))
+            return Response.custom_error(dict(message="Email already in use"))
 
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")
@@ -94,7 +96,7 @@ class CustomerAPI(Resource):
             email = req['email'] if 'email' in req.keys() else None
 
             if (not name) and (not email):
-                return Response.custom(
+                return Response.custom_error(
                     dict(message='Please, update need name or '
                          'email as parameters'))
 
@@ -108,10 +110,14 @@ class CustomerAPI(Resource):
 
             result = database.update(customer_id, name, email)
 
-            message = "Customer updated with success" \
-                if result else "Couldn't update the user, email already in use"
+            if result:
+                return Response.custom_success(
+                    dict(message="Customer updated with success")
+                )
 
-            return Response.custom(dict(message=message))
+            return Response.custom_error(dict(message="Couldn't update "
+                                              "the user, email already in use")
+                                         )
 
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")
@@ -139,10 +145,15 @@ class CustomerAPI(Resource):
             database = CustomerDB()
             result = database.remove(customer_id)
 
-            message = "Customer removed with success" \
-                if result else "Couldn't remove the user"
+            if result:
+                return Response.custom_success(
+                    dict(message="Customer removed with success")
+                )
 
-            return Response.custom(dict(message=message))
+            return Response.custom_error(dict(message="Couldn't remove "
+                                              "the user")
+                                         )
+
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")
 

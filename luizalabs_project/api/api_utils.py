@@ -9,24 +9,28 @@ class Response():
     """ An helper to manage all the mensages from the API """
 
     @staticmethod
-    def custom(body):
-        return dict(status='Success', **body)
+    def custom_success(body):
+        return dict(status='Success', **body), 200
+
+    @staticmethod
+    def custom_error(body):
+        return dict(status='Error', **body), 500
 
     @staticmethod
     def error():
-        return dict(status='Internal Error')
+        return dict(status='Internal Error'), 500
 
     @staticmethod
     def parameters_error():
-        return dict(message='Parameters Error')
+        return dict(message='Parameters Error'), 500
 
     @staticmethod
     def autorization_error():
-        return dict(message='Not autorized, please authenticate')
+        return dict(message='Not autorized, please authenticate'), 401
 
     @staticmethod
     def login_error():
-        return dict(message='Login error')
+        return dict(message='Login error'), 401
 
 
 def verify_auth(function):

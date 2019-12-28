@@ -22,7 +22,7 @@ class FavoritesListAPI(Resource):
             result = [MagaluProducts.check_product(
                 favorite) for favorite in favorites]
 
-            return Response.custom(dict(fav_products=result))
+            return Response.custom_success(dict(fav_products=result))
 
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")
@@ -58,10 +58,11 @@ class FavoritesAPI(Resource):
                 result = database.insert_favorite(customer_id, product_id)
 
                 if result:
-                    return Response.custom(
-                        dict(message="insertion with success"))
-                else:
-                    return Response.custom(dict(message="item duplicated"))
+                    return Response.custom_success(
+                        dict(message="insertion with success")
+                    )
+
+                return Response.custom_error(dict(message="item duplicated"))
 
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")
@@ -92,9 +93,11 @@ class FavoritesAPI(Resource):
             result = database.remove_favorite(customer_id, product_id)
 
             if result:
-                return Response.custom(dict(message="removed with success"))
-            else:
-                return Response.custom(dict(message="item not found"))
+                return Response.custom_success(
+                    dict(message="removed with success")
+                )
+
+            return Response.custom_error(dict(message="item not found"))
 
         except pymongo.errors.OperationFailure:
             logger.exception("Database Failure !!!")

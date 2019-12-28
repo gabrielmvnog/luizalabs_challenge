@@ -155,7 +155,7 @@ class CutomerAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("Email already in use", data)
 
     def test_updateOne_name(self):
@@ -231,7 +231,7 @@ class CutomerAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("Couldn't update the user, email already in use", data)
 
     def test_updateOne_none(self):
@@ -246,7 +246,7 @@ class CutomerAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("Please, update need name or email as parameters", data)
 
     def test_deleteOne(self):
@@ -288,7 +288,7 @@ class CutomerAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("Couldn't remove the user", data)
 
 

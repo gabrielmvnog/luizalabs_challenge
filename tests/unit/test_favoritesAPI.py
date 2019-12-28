@@ -110,7 +110,7 @@ class FavoritesAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("item duplicated", data)
 
     def test_deleteFavorite(self):
@@ -168,7 +168,7 @@ class FavoritesAPITestCase(unittest.TestCase):
 
         data = response.get_data(as_text=True)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 500)
         self.assertIn("item not found", data)
 
 
