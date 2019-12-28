@@ -1,9 +1,8 @@
+Flask_RESTful==0.3.7
 Flask==1.1.1
+requests==2.22.0
+mockupdb==1.7.0
 pymongo==3.10.0
 loguru==0.3.2
-requests==2.22.0
-Flask_RESTful==0.3.7
 flasgger==0.9.3
 PyJWT==1.7.1
-jsonschema==2.6.0
-gunicorn==20.0.4

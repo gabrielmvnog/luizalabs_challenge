@@ -14,6 +14,7 @@ class FavoritesListAPI(Resource):
     @swag_from('docs/favoritesListAPI_get.yml')
     @verify_auth
     def get(self, customer_id):
+        logger.info("Finding favorite products")
         try:
             database = CustomerDB()
 

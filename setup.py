@@ -15,6 +15,7 @@ pkgs_requires = [
     'requests==2.22.0',
     'loguru==0.3.2',
     'gunicorn==20.0.4',
+    'mockupdb==1.7.0',
     'jsonschema==2.6.0'
 ]
 
