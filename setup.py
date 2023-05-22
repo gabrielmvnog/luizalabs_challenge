@@ -12,7 +12,7 @@ pkgs_requires = [
     'flasgger==0.9.3',
     'PyJWT==1.7.1',
     'pymongo==3.10.0',
-    'requests==2.22.0',
+    'requests==2.31.0',
     'loguru==0.3.2',
     'gunicorn==20.0.4',
     'mockupdb==1.7.0',
